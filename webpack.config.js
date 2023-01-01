@@ -4,9 +4,6 @@ const FileManagerPlugin = require('filemanager-webpack-plugin');
 const ImageMinimizerPlugin = require('image-minimizer-webpack-plugin');
 const path = require('path');
 
-console.log('__dirname', __dirname);
-console.log(path.resolve(__dirname, 'src/components/common/'));
-
 module.exports = {
   entry: path.join(__dirname, 'src', 'index.js'),
   output: {
