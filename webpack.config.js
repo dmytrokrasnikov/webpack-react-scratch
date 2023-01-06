@@ -2,18 +2,17 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const FileManagerPlugin = require('filemanager-webpack-plugin');
 const ImageMinimizerPlugin = require('image-minimizer-webpack-plugin');
-const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 const path = require('path');
 
 module.exports = {
-  entry: path.join(__dirname, 'src', 'index.tsx'),
+  entry: path.join(__dirname, 'src', 'index.js'),
   output: {
     path: path.join(__dirname, 'dist'),
     filename: 'index.[contenthash].js',
     assetModuleFilename: path.join('images', '[name].[contenthash][ext]')
   },
   resolve: {
-    extensions: ['.js', '.json', '.jsx', '.ts', '.tsx'],
+    extensions: ['.js', '.json', '.jsx'],
     alias: {
       'common': path.resolve(__dirname, 'src/components/common/'),
       'images': path.resolve(__dirname, 'src/images/')
@@ -27,7 +26,6 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: '[name].[contenthash].css'
     }),
-    new TsconfigPathsPlugin({ configFile: "./tsconfig.json" }),
     new FileManagerPlugin({
       events: {
         onStart: {
@@ -36,7 +34,6 @@ module.exports = {
       },
     }),
   ],
-  devtool: "source-map",
   devServer: {
     watchFiles: path.join(__dirname, 'src'),
     port: 9000,
@@ -44,7 +41,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.m?(j|t)s(x?)$/,
+        test: /\.m?js(x?)$/,
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
@@ -54,8 +51,6 @@ module.exports = {
           }
         }
       },
-      { test: /\.ts(x?)$/, loader: "ts-loader", exclude: /node_modules/, },
-      { test: /\.js$/, loader: "source-map-loader" },
       {
         test: /\.(scss|css)$/,
         use: [
