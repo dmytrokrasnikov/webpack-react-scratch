@@ -21,6 +21,11 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "sourceMap": true,
+    "baseUrl": ".",
+    "paths": {
+      "common/*": ["./src/components/common/*"],
+      "images/*": ["./src/images/*"],
+    },
     "jsx": "react-jsx",
     "typeRoots": [
       "src/@types"
